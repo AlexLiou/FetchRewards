@@ -16,12 +16,8 @@
 		798768E12868D4EE00D2FA9E /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768E02868D4EE00D2FA9E /* Meal.swift */; };
 		798768E32868D70400D2FA9E /* MealDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768E22868D70400D2FA9E /* MealDetail.swift */; };
 		798768E52868DE5F00D2FA9E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768E42868DE5F00D2FA9E /* DetailViewController.swift */; };
-		798768E82868E6C100D2FA9E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768E72868E6C100D2FA9E /* APIClient.swift */; };
-		798768EA2868E6FB00D2FA9E /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768E92868E6FB00D2FA9E /* APIRequest.swift */; };
-		798768EC2868E78F00D2FA9E /* URLSessionAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768EB2868E78F00D2FA9E /* URLSessionAPIClient.swift */; };
 		798768F02868F1E700D2FA9E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 798768EF2868F1E700D2FA9E /* Kingfisher */; };
 		798768F2286A510F00D2FA9E /* Image-Resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768F1286A510F00D2FA9E /* Image-Resizable.swift */; };
-		79FB708F286B63E40017D08D /* MealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FB708E286B63E40017D08D /* MealRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +32,7 @@
 		798768E02868D4EE00D2FA9E /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		798768E22868D70400D2FA9E /* MealDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetail.swift; sourceTree = "<group>"; };
 		798768E42868DE5F00D2FA9E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		798768E72868E6C100D2FA9E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		798768E92868E6FB00D2FA9E /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		798768EB2868E78F00D2FA9E /* URLSessionAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionAPIClient.swift; sourceTree = "<group>"; };
 		798768F1286A510F00D2FA9E /* Image-Resizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-Resizable.swift"; sourceTree = "<group>"; };
-		79FB708E286B63E40017D08D /* MealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,11 +68,9 @@
 			children = (
 				798768CC2868CAC200D2FA9E /* AppDelegate.swift */,
 				798768CE2868CAC200D2FA9E /* SceneDelegate.swift */,
-				798768ED2868E84200D2FA9E /* API */,
-				798768D02868CAC200D2FA9E /* ViewController.swift */,
-				798768E42868DE5F00D2FA9E /* DetailViewController.swift */,
-				798768F1286A510F00D2FA9E /* Image-Resizable.swift */,
-				798768E62868E6AA00D2FA9E /* Models */,
+				79A46F19286F89850033BF6E /* Activities */,
+				79A46F17286F893E0033BF6E /* Controllers */,
+				79A46F18286F89660033BF6E /* Extensions */,
 				798768D22868CAC200D2FA9E /* Main.storyboard */,
 				798768D52868CAC300D2FA9E /* Assets.xcassets */,
 				798768D72868CAC300D2FA9E /* LaunchScreen.storyboard */,
@@ -89,24 +79,46 @@
 			path = FetchRewards;
 			sourceTree = "<group>";
 		};
-		798768E62868E6AA00D2FA9E /* Models */ = {
+		79A46F17286F893E0033BF6E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				798768E42868DE5F00D2FA9E /* DetailViewController.swift */,
+				798768D02868CAC200D2FA9E /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		79A46F18286F89660033BF6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				798768F1286A510F00D2FA9E /* Image-Resizable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		79A46F19286F89850033BF6E /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				79A46F1B286F89950033BF6E /* MealDetails */,
+				79A46F1A286F898B0033BF6E /* Meal */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
+		79A46F1A286F898B0033BF6E /* Meal */ = {
 			isa = PBXGroup;
 			children = (
 				798768E02868D4EE00D2FA9E /* Meal.swift */,
-				79FB708E286B63E40017D08D /* MealRepository.swift */,
-				798768E22868D70400D2FA9E /* MealDetail.swift */,
 			);
-			path = Models;
+			path = Meal;
 			sourceTree = "<group>";
 		};
-		798768ED2868E84200D2FA9E /* API */ = {
+		79A46F1B286F89950033BF6E /* MealDetails */ = {
 			isa = PBXGroup;
 			children = (
-				798768E72868E6C100D2FA9E /* APIClient.swift */,
-				798768E92868E6FB00D2FA9E /* APIRequest.swift */,
-				798768EB2868E78F00D2FA9E /* URLSessionAPIClient.swift */,
+				798768E22868D70400D2FA9E /* MealDetail.swift */,
 			);
-			path = API;
+			path = MealDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,15 +199,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				798768E12868D4EE00D2FA9E /* Meal.swift in Sources */,
-				798768E82868E6C100D2FA9E /* APIClient.swift in Sources */,
 				798768D12868CAC200D2FA9E /* ViewController.swift in Sources */,
 				798768F2286A510F00D2FA9E /* Image-Resizable.swift in Sources */,
-				79FB708F286B63E40017D08D /* MealRepository.swift in Sources */,
 				798768E32868D70400D2FA9E /* MealDetail.swift in Sources */,
 				798768E52868DE5F00D2FA9E /* DetailViewController.swift in Sources */,
 				798768CD2868CAC200D2FA9E /* AppDelegate.swift in Sources */,
-				798768EA2868E6FB00D2FA9E /* APIRequest.swift in Sources */,
-				798768EC2868E78F00D2FA9E /* URLSessionAPIClient.swift in Sources */,
 				798768CF2868CAC200D2FA9E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

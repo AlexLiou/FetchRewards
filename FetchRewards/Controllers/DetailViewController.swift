@@ -10,49 +10,23 @@ import Kingfisher
 
 extension DetailViewController {
     class ViewModel {
-        let urlString = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
 
-        var mealDetails = [MealDetail]()
+        var mealDetails: [MealDetail] = []
 
-        lazy var titleLabel: UILabel = {
-            let label = UILabel()
-            label.text = mealDetails[0].unwrStrMeal
-            label.font = .boldSystemFont(ofSize: 30)
-            label.numberOfLines = 0
-            label.sizeToFit()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-
-        lazy var topImageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.kf.setImage(with: URL(string: mealDetails[0].unwrStrMealThumb)) { result in
-                switch result {
-                case .success(let value):
-                    print("Image: \(value.image). Got from: \(value.cacheType)")
-                case .failure(let error):
-                    print("Error: \(error)")
-                }
+        func loadData(urlString: String) {
+            guard let url = URL(string: urlString) else {
+                print("Invalid URL")
+                return
             }
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.sizeToFit()
-            imageView.layer.masksToBounds = true
-            imageView.layer.borderWidth = 1.5
-            imageView.layer.borderColor = UIColor.black.cgColor
-            return imageView
-        }()
 
-        lazy var listView: UIView = {
-            return generateList()
-        }()
-
-        func parse(json: Data) {
-            let decoder = JSONDecoder()
-
-            if let jsonPetitions = try? decoder.decode(MealDetailResponse.self, from: json) {
-                mealDetails = jsonPetitions.meals
-                
+            do {
+                let data = try Data(contentsOf: url)
+                if let decodedResponse = try? JSONDecoder().decode(MealDetailResponse.self, from: data) {
+                    mealDetails = decodedResponse.meals
+                    print(mealDetails)
+                }
+            } catch {
+                print("Invalid data")
             }
         }
 
@@ -116,22 +90,46 @@ extension DetailViewController {
             previous?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             return contentView
         }
-
-        lazy var directionsTextLabel: UILabel = {
-            let label = UILabel()
-            label.text = mealDetails[0].unwrStrInstructions
-            label.numberOfLines = 0
-            label.sizeToFit()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-
     }
 }
 
 class DetailViewController: UIViewController {
+    let urlString = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
     var id: String?
     var vm = ViewModel()
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = vm.mealDetails[0].unwrStrMeal
+        label.font = .boldSystemFont(ofSize: 30)
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var topImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.kf.setImage(with: URL(string: vm.mealDetails[0].unwrStrMealThumb)) { result in
+            switch result {
+            case .success(let value):
+                print("Image: \(value.image). Got from: \(value.cacheType)")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.sizeToFit()
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 1.5
+        imageView.layer.borderColor = UIColor.black.cgColor
+        return imageView
+    }()
+
+    lazy var listView: UIView = {
+        return vm.generateList()
+    }()
+
     private let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -157,19 +155,21 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var directionsTextLabel: UILabel = {
+        let label = UILabel()
+        label.text = vm.mealDetails[0].unwrStrInstructions
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         setupScrollView()
-
-        if let url = URL(string: vm.urlString + id!) {
-            if let data = try? Data(contentsOf: url) {
-                vm.parse(json: data)
-                setUpAutoLayout()
-                return
-            }
-        }
+        vm.loadData(urlString: urlString+id!)
+        setUpAutoLayout()
         // Do any additional setup after loading the view.
     }
 
@@ -189,37 +189,37 @@ class DetailViewController: UIViewController {
     }
 
     func setUpAutoLayout() {
-        contentView.addSubview(vm.titleLabel)
-        vm.titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        vm.titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        vm.titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
+        contentView.addSubview(titleLabel)
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
 
-        contentView.addSubview(vm.topImageView)
-        vm.topImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        vm.topImageView.topAnchor.constraint(equalTo: vm.titleLabel.bottomAnchor, constant: 25).isActive = true
-        vm.topImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
+        contentView.addSubview(topImageView)
+        topImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        topImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25).isActive = true
+        topImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
         let targetSize = CGSize(width: view.frame.size.width, height: 250)
-        vm.topImageView.image = vm.topImageView.image?.scalePreservingAspectRatio(targetSize: targetSize)
+        topImageView.image = topImageView.image?.scalePreservingAspectRatio(targetSize: targetSize)
 
         contentView.addSubview(ingredientsLabel)
         ingredientsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        ingredientsLabel.topAnchor.constraint(equalTo: vm.topImageView.bottomAnchor, constant: 25).isActive = true
+        ingredientsLabel.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 25).isActive = true
         ingredientsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
 
-        contentView.addSubview(vm.listView)
-        vm.listView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        vm.listView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 25).isActive = true
-        vm.listView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        contentView.addSubview(listView)
+        listView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        listView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 25).isActive = true
+        listView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
 
         contentView.addSubview(directionsLabel)
         directionsLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        directionsLabel.topAnchor.constraint(equalTo: vm.listView.bottomAnchor, constant: 25).isActive = true
+        directionsLabel.topAnchor.constraint(equalTo: listView.bottomAnchor, constant: 25).isActive = true
         directionsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
 
-        contentView.addSubview(vm.directionsTextLabel)
-        vm.directionsTextLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        vm.directionsTextLabel.topAnchor.constraint(equalTo: directionsLabel.bottomAnchor, constant: 25).isActive = true
-        vm.directionsTextLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
-        vm.directionsTextLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentView.addSubview(directionsTextLabel)
+        directionsTextLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        directionsTextLabel.topAnchor.constraint(equalTo: directionsLabel.bottomAnchor, constant: 25).isActive = true
+        directionsTextLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
+        directionsTextLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 }
