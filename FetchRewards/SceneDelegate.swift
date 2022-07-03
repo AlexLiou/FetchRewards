@@ -20,12 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = UIWindow(windowScene: windowScene)
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let rootVC = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController else {
-            print("ViewController not found")
-            return
-        }
-        let rootNC = UINavigationController(rootViewController: rootVC)
+        let mealListTableViewController = MealListTableViewController()
+        window?.rootViewController = mealListTableViewController
+        let rootNC = UINavigationController(rootViewController: (window?.rootViewController)!)
         self.window?.rootViewController = rootNC
         self.window?.makeKeyAndVisible()
     }
