@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		797643E02873588C000EA1ED /* MealListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797643DF2873588C000EA1ED /* MealListTableView.swift */; };
 		798768CD2868CAC200D2FA9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768CC2868CAC200D2FA9E /* AppDelegate.swift */; };
 		798768CF2868CAC200D2FA9E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798768CE2868CAC200D2FA9E /* SceneDelegate.swift */; };
 		798768D62868CAC300D2FA9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798768D52868CAC300D2FA9E /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		797643DF2873588C000EA1ED /* MealListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListTableView.swift; sourceTree = "<group>"; };
 		798768C92868CAC200D2FA9E /* FetchRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798768CC2868CAC200D2FA9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		798768CE2868CAC200D2FA9E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				798768E02868D4EE00D2FA9E /* Meal.swift */,
 				79A46F20286F906C0033BF6E /* MealListTableViewController.swift */,
+				797643DF2873588C000EA1ED /* MealListTableView.swift */,
 				79A46F32287245810033BF6E /* MealListTableViewController+Layout.swift */,
 				79A46F22286F90E10033BF6E /* MealListTableViewDataSource.swift */,
 			);
@@ -206,6 +209,7 @@
 				79A46F2D286FEC8E0033BF6E /* DecodableDefaultSource.swift in Sources */,
 				79A46F33287245810033BF6E /* MealListTableViewController+Layout.swift in Sources */,
 				79A46F21286F906C0033BF6E /* MealListTableViewController.swift in Sources */,
+				797643E02873588C000EA1ED /* MealListTableView.swift in Sources */,
 				79A46F29286FDDB10033BF6E /* MealDetailViewController.swift in Sources */,
 				798768F2286A510F00D2FA9E /* Image-Resizable.swift in Sources */,
 				79A46F27286FD5AA0033BF6E /* UIView-Anchor.swift in Sources */,
