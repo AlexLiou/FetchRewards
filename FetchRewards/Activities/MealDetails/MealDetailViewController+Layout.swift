@@ -9,7 +9,7 @@ import UIKit
 
 extension MealDetailScrollView {
     
-    func setUpViews(titleLabel: MealDetailTitleLabel) {
+    func setUpViews() {
         addSubview(contentView)
         contentView.frame = frame
 

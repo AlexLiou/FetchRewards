@@ -17,6 +17,7 @@ class MealDetailTitleLabel: UILabel {
         self.font = .boldSystemFont(ofSize: 30)
         self.numberOfLines = 0
         self.sizeToFit()
+        self.backgroundColor = UIColor.magenta
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 

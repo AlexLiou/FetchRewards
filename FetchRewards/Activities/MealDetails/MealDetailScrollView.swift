@@ -9,17 +9,19 @@ import UIKit
 
 class MealDetailScrollView: UIScrollView {
 
+
     let mealDetails: [MealDetail]
 
     lazy var contentView: UIView = { [weak self] in
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.magenta
         return view
     }()
 
-//    lazy var titleLabel: UILabel = { [weak self] in
-//        return MealDetailTitleLabel(title: mealDetails[0].strMeal)
-//    }()
+    lazy var titleLabel: UILabel = { [weak self] in
+        return MealDetailTitleLabel(title: mealDetails[0].strMeal)
+    }()
 
     lazy var topImageView: UIImageView = { [weak self] in
         return MealDetailImageView(url: mealDetails[0].strMealThumb)
@@ -43,15 +45,15 @@ class MealDetailScrollView: UIScrollView {
     
 
     init(mealDetails: [MealDetail]) {
-        let titleLabel = MealDetailTitleLabel(title: mealDetails[0].strMeal)
 
         self.mealDetails = mealDetails
         super.init(frame: .zero)
 
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.magenta
 
-        setUpViews(titleLabel: titleLabel)
+
+        setUpViews()
     }
     
     required init?(coder: NSCoder) {
