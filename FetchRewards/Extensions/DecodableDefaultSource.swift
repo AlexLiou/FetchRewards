@@ -74,11 +74,11 @@ enum CommonDefault {
 }
 
 enum DefaultBy {
-    typealias Empty<Value: Decodable & EmptyInitializable> = DefaultDecodable<CommonDefault.Empty<Value>>
+    typealias Empty<Value: Codable & EmptyInitializable> = DefaultDecodable<CommonDefault.Empty<Value>>
 
-    typealias Zero<Value: Decodable & Numeric> = DefaultDecodable<CommonDefault.Zero<Value>>
+    typealias Zero<Value: Codable & Numeric> = DefaultDecodable<CommonDefault.Zero<Value>>
 
-    typealias One<Value: Decodable & Numeric> = DefaultDecodable<CommonDefault.One<Value>>
+    typealias One<Value: Codable & Numeric> = DefaultDecodable<CommonDefault.One<Value>>
 
-    typealias MinusOne<Value: Decodable & Numeric> = DefaultDecodable<CommonDefault.MinusOne<Value>>
+    typealias MinusOne<Value: Codable & Numeric> = DefaultDecodable<CommonDefault.MinusOne<Value>>
 }
