@@ -12,10 +12,11 @@ struct MealResponse: Codable {
 }
 
 struct Meal: Codable {
-//    @DefaultBy.Empty var strMeal: String
-//    @DefaultBy.Empty var strMealThumb: String
-//    @DefaultBy.Empty var idMeal: String
-    var strMeal: String
-    var strMealThumb: String
-    var idMeal: String
+    @DefaultBy.Empty var strMeal: String
+    @DefaultBy.Empty var strMealThumb: String
+    @DefaultBy.Empty var idMeal: String
+    var empty: String
+//    var strMeal: String
+//    var strMealThumb: String
+//    var idMeal: String
 }

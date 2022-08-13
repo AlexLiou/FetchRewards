@@ -14,14 +14,11 @@ class MealListTableViewControllerViewModel {
     var repo: MealRepoable = MealRepository.shared
     
     func loadData() async {
-        repo.getMeals { result in
-            switch result {
-            case .success(let meals):
-                self.meals = meals
-                print(self.meals.count)
-            case .failure(let error):
-                print(error)
-            }
+        do {
+            let meals = try await repo.getMeals()
+            self.meals = meals
+        } catch let error {
+            print(error)
         }
     }
 }

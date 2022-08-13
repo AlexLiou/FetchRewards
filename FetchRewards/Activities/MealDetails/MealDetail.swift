@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct MealDetailResponse: Decodable {
+struct MealDetailResponse: Codable {
     var meals: [MealDetail]
 }
 
-struct MealDetail: Decodable {
+struct MealDetail: Codable {
     @DefaultBy.Empty var idMeal: String
     @DefaultBy.Empty var strMeal: String
     @DefaultBy.Empty var strInstructions: String

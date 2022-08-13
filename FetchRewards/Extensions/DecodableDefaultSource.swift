@@ -14,7 +14,7 @@ protocol Default {
 }
 
 @propertyWrapper
-struct DefaultDecodable<D: Default>: Decodable where D.Value: Decodable {
+struct DefaultDecodable<D: Default>: Codable where D.Value: Codable {
     let wrappedValue: D.Value
 
     init(from decoder: Decoder) throws {

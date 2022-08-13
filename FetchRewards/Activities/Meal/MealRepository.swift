@@ -8,7 +8,8 @@
 import Foundation
 
 protocol MealRepoable {
-    func getMeals(_ closure: @escaping (Result<[Meal], Error>) -> Void)
+//    func getMeals(_ closure: @escaping (Result<[Meal], Error>) -> Void)
+    func getMeals() async throws -> [Meal]
 }
 
 struct GetMealRequest: APIRequest {
@@ -24,18 +25,26 @@ class MealRepository: MealRepoable {
 
     static var shared = MealRepository()
     var api: APIClient = URLSessionAPIClient(session: URLSession.shared)
-
-    func getMeals(_ closure: @escaping (Result<[Meal], Error>) -> Void) {
+    func getMeals() async throws -> [Meal] {
         let request = GetMealRequest()
-        api.send(request: request) { result in
-            switch result {
-            case .success(let response):
-                closure(.success(response.meals))
-            case .failure(let error):
-                closure(.failure(error))
-            }
+        do {
+            let response = try await api.send(request: request)
+            return response.meals
+        } catch let error {
+            throw error
         }
     }
+//    func getMeals(_ closure: @escaping (Result<[Meal], Error>) -> Void) async {
+//        let request = GetMealRequest()
+//        api.send(request: request) { result in
+//            switch result {
+//            case .success(let response):
+//                closure(.success(response.meals))
+//            case .failure(let error):
+//                closure(.failure(error))
+//            }
+//        }
+//    }
 
     private init() {}
 }
